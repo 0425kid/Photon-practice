@@ -30,15 +30,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         instance = this;
-        //Screen.SetResolution(1920, 1080, false);
-        Screen.SetResolution(960, 540, false);
         PhotonNetwork.ConnectUsingSettings();
     }
 
     // Update is called once per frame
     void Update()
     {
-        StatusText.text = PhotonNetwork.NetworkClientState.ToString();
+        //StatusText.text = PhotonNetwork.NetworkClientState.ToString();
         if(!PhotonNetwork.InRoom)
         {
             PhotonStatusText.text =
@@ -53,19 +51,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 $"현재 방에 있는 인원 : {PhotonNetwork.CurrentRoom.PlayerCount}\n";
 
         }
-
-
-        //if (PhotonNetwork.InLobby && RoomToMove != string.Empty)
-        //{
-        //    JoinOrCreateRoom(RoomToMove);
-        //    RoomToMove = null;
-        //}
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("서버 접속 완료");
-        UIManager.GetComponent<UIManager>().ShowSimplePanel();
+        //UIManager.GetComponent<UIManager>().ShowSimplePanel();
         PhotonNetwork.JoinLobby();
 
     }
@@ -182,15 +173,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         UIManager.GetComponent<UIManager>().HideLobbyCanvas();
         UIManager.GetComponent<UIManager>().ShowForumCanvas();
         GeneratePlayer(nickName);
-        //try
-        //{
-        //    SetTeamIndex(int.Parse(TeamInput.text));
-        //}
-        //catch
-        //{
-        //    TeamIndex = 0;
-        //}
-
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
